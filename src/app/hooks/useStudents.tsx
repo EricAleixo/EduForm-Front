@@ -16,7 +16,7 @@ export const useStudents = () =>{
             const response = await postStudents(formData);
             if(response.status === 201){
                 setResult(true);
-                return { success: true, message: 'Estudante cadastrado com sucesso!' };
+                return { success: true, message: 'Dados enviados com sucesso!' };
             }
             setResult(false);
             return { success: false, message: 'Resposta inesperada do servidor' };
