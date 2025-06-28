@@ -1,0 +1,21 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="16" cy="16" r="16" fill="#3B82F6"/>
+  
+  <!-- Graduation cap -->
+  <path d="M16 6L26 12L16 18L6 12L16 6Z" fill="white"/>
+  
+  <!-- Tassel -->
+  <path d="M16 18V22" stroke="white" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="16" cy="24" r="2" fill="white"/>
+  
+  <!-- Book -->
+  <rect x="8" y="20" width="6" height="8" rx="1" fill="#F59E0B"/>
+  <rect x="9" y="21" width="4" height="1" fill="white"/>
+  <rect x="9" y="23" width="3" height="1" fill="white"/>
+  <rect x="9" y="25" width="4" height="1" fill="white"/>
+  
+  <!-- Pencil -->
+  <path d="M20 20L24 24L22 26L18 22L20 20Z" fill="#EF4444"/>
+  <path d="M18 22L20 24L19 25L17 23L18 22Z" fill="#DC2626"/>
+</svg> 

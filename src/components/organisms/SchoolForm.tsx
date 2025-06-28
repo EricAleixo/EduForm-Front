@@ -6,19 +6,8 @@ import { FormSection } from '../molecules/FormSection';
 import { Button } from '../atoms/Button';
 import { Notification } from '../atoms/Notification';
 
-interface FormData {
-  nome: string;
-  email: string;
-  telefone: string;
-  dataNascimento: string;
-  turma: string;
-  serie: string;
-  turno: string;
-  responsavel: string;
-  pizzaPreferida: string;
-  endereco: string;
-  observacoes: string;
-}
+import { StudentFormData } from '@/app/types/formData.types';
+import { useStudents } from '@/app/hooks/useStudents';
 
 const series = [
   { value: '1ano', label: '1º Ano' },
@@ -51,7 +40,7 @@ const turnos = [
 ];
 
 export const SchoolForm: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<StudentFormData>({
     nome: '',
     email: '',
     telefone: '',
@@ -65,8 +54,9 @@ export const SchoolForm: React.FC = () => {
     observacoes: '',
   });
 
-  const [errors, setErrors] = useState<Partial<FormData>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { loading, createStudent } = useStudents();
+
+  const [errors, setErrors] = useState<Partial<StudentFormData>>({});
   const [isIconFlying, setIsIconFlying] = useState(false);
   const [notification, setNotification] = useState<{
     type: 'success' | 'error';
@@ -78,7 +68,7 @@ export const SchoolForm: React.FC = () => {
     isVisible: false,
   });
 
-  const handleFieldChange = (field: keyof FormData, value: string) => {
+  const handleFieldChange = (field: keyof StudentFormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
     if (errors[field]) {
@@ -87,7 +77,7 @@ export const SchoolForm: React.FC = () => {
   };
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<FormData> = {};
+    const newErrors: Partial<StudentFormData> = {};
 
     if (!formData.nome.trim()) {
       newErrors.nome = 'Nome é obrigatório';
@@ -146,38 +136,44 @@ export const SchoolForm: React.FC = () => {
       return;
     }
 
-    setIsSubmitting(true);
     setIsIconFlying(true);
 
     try {
-      // Simulate API call with random success/failure
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const response = await createStudent(formData);
 
-      // Simulate random success/failure for demo
-      const isSuccess = Math.random() > 0.3; // 70% success rate
-
-      if (isSuccess) {
+      if (response.success) {
         console.log('Form submitted:', formData);
-        showNotification('success', 'Dados enviados com sucesso! Matrícula realizada.');
+        showNotification('success', response.message);
+        setFormData({
+          nome: '',
+          email: '',
+          telefone: '',
+          dataNascimento: '',
+          turma: '',
+          serie: '',
+          turno: '',
+          responsavel: '',
+          pizzaPreferida: '',
+          endereco: '',
+          observacoes: '',
+        });
+        setErrors({});
       } else {
-        throw new Error('Erro na conexão com o servidor');
+        showNotification('error', response.message);
       }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Submission error:', error);
       showNotification('error', 'Erro ao enviar dados. Tente novamente.');
     } finally {
-      setIsSubmitting(false);
-      // Reset icon animation after a delay
       setTimeout(() => {
         setIsIconFlying(false);
-      }, 800);
+      }, 1000);
     }
   };
 
   return (
     <>
       <form onSubmit={handleSubmit} className="space-y-8">
-        {/* Informações Pessoais */}
         <FormSection
           title="Informações Pessoais"
           description="Dados básicos do estudante"
@@ -405,7 +401,7 @@ export const SchoolForm: React.FC = () => {
 
           <Button
             type="submit"
-            loading={isSubmitting}
+            loading={loading}
             icon={
               <svg
                 className={`w-5 h-5 transition-all duration-300 ${isIconFlying ? 'animate-fly-up' : ''}`}
@@ -417,7 +413,7 @@ export const SchoolForm: React.FC = () => {
               </svg>
             }
           >
-            {isSubmitting ? 'Enviando...' : 'Enviar Matrícula'}
+            {loading ? 'Enviando...' : 'Enviar Matrícula'}
           </Button>
         </div>
       </form>
