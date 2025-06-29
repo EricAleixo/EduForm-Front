@@ -10,4 +10,5 @@ export interface StudentFormData {
   pizzaPreferida: string;
   endereco?: string;
   observacoes?: string;
+  documentoIdentidade?: File | null;
 }

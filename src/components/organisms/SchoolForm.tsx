@@ -6,7 +6,7 @@ import { FormSection } from '../molecules/FormSection';
 import { Button } from '../atoms/Button';
 import { Notification } from '../atoms/Notification';
 
-import { StudentFormData } from '@/app/types/formData.types';
+import { StudentFormData } from '@/app/types/StudentFormData.types';
 import { useStudents } from '@/app/hooks/useStudents';
 
 const series = [
@@ -52,23 +52,25 @@ export const SchoolForm: React.FC = () => {
     pizzaPreferida: '',
     endereco: '',
     observacoes: '',
+    documentoIdentidade: null,
   });
 
   const { loading, createStudent } = useStudents();
 
-  const [errors, setErrors] = useState<Partial<StudentFormData>>({});
+  const [errors, setErrors] = useState<Partial<Record<keyof StudentFormData, string>>>({});
   const [isIconFlying, setIsIconFlying] = useState(false);
   const [notification, setNotification] = useState<{
-    type: 'success' | 'error';
+    type: 'success' | 'error' | 'warning' | 'info';
     message: string;
     isVisible: boolean;
+    title?: string;
   }>({
     type: 'success',
     message: '',
     isVisible: false,
   });
 
-  const handleFieldChange = (field: keyof StudentFormData, value: string) => {
+  const handleFieldChange = (field: keyof StudentFormData, value: string | File | null) => {
     setFormData(prev => ({ ...prev, [field]: value }));
     // Clear error when user starts typing
     if (errors[field]) {
@@ -77,7 +79,7 @@ export const SchoolForm: React.FC = () => {
   };
 
   const validateForm = (): boolean => {
-    const newErrors: Partial<StudentFormData> = {};
+    const newErrors: Partial<Record<keyof StudentFormData, string>> = {};
 
     if (!formData.nome.trim()) {
       newErrors.nome = 'Nome é obrigatório';
@@ -113,15 +115,20 @@ export const SchoolForm: React.FC = () => {
       newErrors.responsavel = 'Nome do responsável é obrigatório';
     }
 
+    if (!formData.documentoIdentidade) {
+      newErrors.documentoIdentidade = 'Documento de identidade é obrigatório';
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const showNotification = (type: 'success' | 'error', message: string) => {
+  const showNotification = (type: 'success' | 'error' | 'warning' | 'info', message: string, title?: string) => {
     setNotification({
       type,
       message,
       isVisible: true,
+      title,
     });
   };
 
@@ -139,11 +146,26 @@ export const SchoolForm: React.FC = () => {
     setIsIconFlying(true);
 
     try {
-      const response = await createStudent(formData);
+
+      const formSubmit = new FormData();
+      for (const key in formData) {
+        const value = formData[key as keyof typeof formData];
+
+        if (value !== undefined && value !== null) {
+          if (value instanceof File) {
+            formSubmit.append(key, value);
+          } else {
+            formSubmit.append(key, String(value));
+          }
+        }
+      }
+
+
+      const response = await createStudent(formSubmit);
 
       if (response.success) {
-        console.log('Form submitted:', formData);
-        showNotification('success', response.message);
+        console.log('Form submitted:', formSubmit);
+        showNotification('success', response.message, 'Matrícula Enviada!');
         setFormData({
           nome: '',
           email: '',
@@ -156,14 +178,15 @@ export const SchoolForm: React.FC = () => {
           pizzaPreferida: '',
           endereco: '',
           observacoes: '',
+          documentoIdentidade: null,
         });
         setErrors({});
       } else {
-        showNotification('error', response.message);
+        showNotification('error', response.message, 'Erro no Envio');
       }
     } catch (error) {
       console.error('Submission error:', error);
-      showNotification('error', 'Erro ao enviar dados. Tente novamente.');
+      showNotification('error', 'Erro ao enviar dados. Tente novamente.', 'Erro de Conexão');
     } finally {
       setTimeout(() => {
         setIsIconFlying(false);
@@ -375,6 +398,38 @@ export const SchoolForm: React.FC = () => {
           </div>
         </FormSection>
 
+        {/* Documentos */}
+        <FormSection
+          title="Documentos"
+          description="Documentos necessários para a matrícula"
+          icon={
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+          }
+        >
+          <div className="space-y-6">
+            <FormField
+              type="file"
+              label="Documento de Identidade"
+              name="documentoIdentidade"
+              value={formData.documentoIdentidade}
+              onChange={(value) => handleFieldChange('documentoIdentidade', value)}
+              required
+              error={errors.documentoIdentidade}
+              accept=".pdf,.jpg,.jpeg,.png"
+              maxSize={5}
+              description="RG, CPF ou certidão de nascimento. Formatos aceitos: PDF, JPG, PNG até 5MB"
+              onNotification={showNotification}
+              icon={
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V4a2 2 0 114 0v2m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                </svg>
+              }
+            />
+          </div>
+        </FormSection>
+
         {/* Botões de Ação */}
         <div className="flex flex-col sm:flex-row gap-4 justify-end">
           <Button
@@ -392,6 +447,7 @@ export const SchoolForm: React.FC = () => {
                 pizzaPreferida: '',
                 endereco: '',
                 observacoes: '',
+                documentoIdentidade: null,
               });
               setErrors({});
             }}
@@ -423,6 +479,7 @@ export const SchoolForm: React.FC = () => {
         message={notification.message}
         isVisible={notification.isVisible}
         onClose={hideNotification}
+        title={notification.title}
       />
     </>
   );

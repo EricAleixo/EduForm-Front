@@ -66,6 +66,50 @@ body {
   }
 }
 
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6);
+  }
+}
+
+@keyframes file-drop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes success-check {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes shrink {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
 .animate-slide-in {
   animation: slide-in 0.3s ease-out;
 }
@@ -76,4 +120,25 @@ body {
 
 .animate-bounce-in {
   animation: bounce-in 0.6s ease-out;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-file-drop {
+  animation: file-drop 0.3s ease-out;
+}
+
+.animate-success-check {
+  animation: success-check 0.5s ease-out;
+}
+
+/* Estilos para drag and drop */
+.drag-over {
+  animation: pulse-glow 1s ease-in-out infinite;
+}
+
+.file-upload-success {
+  animation: success-check 0.5s ease-out;
 }

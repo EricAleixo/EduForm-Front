@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { postStudents } from "../api/api";
-import { StudentFormData } from "../types/formData.types";
+import { StudentFormData } from "../types/StudentFormData.types";
 import { AxiosError } from "axios";
 
 export const useStudents = () =>{
@@ -8,7 +8,7 @@ export const useStudents = () =>{
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const createStudent = async (formData: StudentFormData) =>{
+    const createStudent = async (formData: FormData) =>{
         setLoading(true);
         setResult(null);
         setError(null);
@@ -27,7 +27,6 @@ export const useStudents = () =>{
             
             if (err instanceof AxiosError) {
                 if (err.response) {
-                    // Erro com resposta do servidor
                     const status = err.response.status;
                     const data = err.response.data;
                     
