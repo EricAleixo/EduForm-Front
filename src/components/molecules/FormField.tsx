@@ -3,24 +3,29 @@
 import React from 'react';
 import { Input } from '../atoms/Input';
 import { Select } from '../atoms/Select';
+import { FileUpload } from '../atoms/FileUpload';
 
 interface FormFieldProps {
-  type: 'text' | 'email' | 'tel' | 'date' | 'select';
+  type: 'text' | 'email' | 'tel' | 'date' | 'select' | 'file';
   label: string;
   name: string;
-  value?: string;
-  onChange?: (value: string) => void;
+  value?: string | File | null;
+  onChange?: (value: string | File | null) => void;
   required?: boolean;
   error?: string;
   placeholder?: string;
   options?: Array<{ value: string; label: string }>;
   icon?: React.ReactNode;
   description?: string;
+  accept?: string;
+  maxSize?: number;
+  onNotification?: (type: 'success' | 'error' | 'warning' | 'info', message: string) => void;
 }
 
 export const FormField: React.FC<FormFieldProps> = ({
   type,
   label,
+  name,
   value = '',
   onChange,
   required = false,
@@ -28,16 +33,37 @@ export const FormField: React.FC<FormFieldProps> = ({
   placeholder,
   options = [],
   icon,
-  description
+  description,
+  accept,
+  maxSize,
+  onNotification
 }) => {
+  if (type === 'file') {
+    return (
+      <FileUpload
+        label={label}
+        name={name}
+        value={value as File | null}
+        onChange={onChange as (file: File | null) => void}
+        required={required}
+        error={error}
+        accept={accept}
+        maxSize={maxSize}
+        description={description}
+        icon={icon}
+        onNotification={onNotification}
+      />
+    );
+  }
+
   return (
     <div className="space-y-2">
       {type === 'select' ? (
         <Select
           label={label}
           options={options}
-          value={value}
-          onChange={onChange}
+          value={value as string}
+          onChange={onChange as (value: string) => void}
           required={required}
           error={error}
           placeholder={placeholder}
@@ -48,8 +74,8 @@ export const FormField: React.FC<FormFieldProps> = ({
           type={type}
           placeholder={placeholder}
           required={required}
-          value={value}
-          onChange={onChange}
+          value={value as string}
+          onChange={onChange as (value: string) => void}
           error={error}
           icon={icon}
         />

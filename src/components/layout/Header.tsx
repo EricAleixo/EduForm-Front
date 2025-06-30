@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import React from 'react';
 
 export const Header: React.FC = () => {
@@ -20,19 +21,16 @@ export const Header: React.FC = () => {
               <p className="text-blue-100 text-sm">Sistema de Matrículas</p>
             </div>
           </div>
-          
-          <nav className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-blue-100 hover:text-white transition-colors duration-200">
+
+          <nav className="flex items-center space-x-8">
+            <Link href="/" className="text-blue-100 hover:text-white transition-colors">
               Início
-            </a>
-            <a href="#" className="text-blue-100 hover:text-white transition-colors duration-200">
-              Sobre
-            </a>
-            <a href="#" className="text-blue-100 hover:text-white transition-colors duration-200">
-              Contato
-            </a>
+            </Link>
+            <Link href="/admin" className="text-blue-100 hover:text-white transition-colors">
+              Admin
+            </Link>
           </nav>
-          
+
           <div className="md:hidden">
             <button className="text-blue-100 hover:text-white">
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
