@@ -102,19 +102,19 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isFirstAdm
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 py-6 sm:py-12 px-3 sm:px-4 lg:px-8">
+      <div className="max-w-md w-full space-y-6 sm:space-y-8">
         {/* Header */}
         <div className="text-center">
-          <div className="mx-auto h-16 w-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mb-6 animate-pulse">
-            <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="mx-auto h-14 w-14 sm:h-16 sm:w-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mb-4 sm:mb-6 animate-pulse">
+            <svg className="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>
           </div>
-          <h2 className="text-3xl font-bold text-gray-900 mb-2">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
             {showFirstAdmin ? 'Criar Administrador' : 'Login Administrativo'}
           </h2>
-          <p className="text-gray-600">
+          <p className="text-sm sm:text-base text-gray-600">
             {showFirstAdmin 
               ? 'Configure o primeiro administrador do sistema'
               : 'Acesse o painel administrativo'
@@ -123,7 +123,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isFirstAdm
         </div>
 
         {/* Toggle Button */}
-        <div className="text-center space-y-4">
+        <div className="text-center space-y-3 sm:space-y-4">
           <button
             onClick={() => setShowFirstAdmin(!showFirstAdmin)}
             className="text-sm text-blue-600 hover:text-blue-800 underline"
@@ -138,7 +138,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isFirstAdm
             <Button
               variant="outline"
               onClick={() => window.location.href = '/'}
-              className="text-gray-600 border-gray-300 hover:bg-gray-50"
+              className="text-gray-600 border-gray-300 hover:bg-gray-50 w-full sm:w-auto"
               icon={
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -151,7 +151,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isFirstAdm
         </div>
 
         {/* Form */}
-        <form onSubmit={handleSubmit} className="mt-8 space-y-6">
+        <form onSubmit={handleSubmit} className="mt-6 sm:mt-8 space-y-5 sm:space-y-6">
           <div className="space-y-4">
             {/* Username Field */}
             <div>
@@ -171,7 +171,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isFirstAdm
                   required
                   value={credentials.username}
                   onChange={(e) => handleInputChange('username', e.target.value)}
-                  className="appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-gray-400"
+                  className="appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 text-sm sm:text-base transition-all duration-200 hover:border-gray-400"
                   placeholder="Digite seu usuário"
                 />
               </div>
@@ -195,7 +195,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isFirstAdm
                   required
                   value={credentials.password}
                   onChange={(e) => handleInputChange('password', e.target.value)}
-                  className="appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm transition-all duration-200 hover:border-gray-400"
+                  className="appearance-none relative block w-full px-3 py-3 pl-10 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 text-sm sm:text-base transition-all duration-200 hover:border-gray-400"
                   placeholder="Digite sua senha"
                 />
               </div>
@@ -224,7 +224,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, isFirstAdm
           {/* Info Text */}
           {showFirstAdmin && (
             <div className="text-center">
-              <p className="text-sm text-gray-600 bg-blue-50 p-3 rounded-lg border border-blue-200">
+              <p className="text-xs sm:text-sm text-gray-600 bg-blue-50 p-3 rounded-lg border border-blue-200">
                 <svg className="w-4 h-4 inline mr-1 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
