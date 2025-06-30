@@ -541,7 +541,7 @@ export const StudentFormModal: React.FC<StudentFormModalProps> = React.memo(func
               {/* Mostrar documento existente se estiver editando */}
               {isEditing && student?.documentosUrl && (
                 <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-xl p-4 animate-fade-in-up">
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div className="flex items-center space-x-3">
                       <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg flex items-center justify-center shadow-lg">
                         <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -553,7 +553,7 @@ export const StudentFormModal: React.FC<StudentFormModalProps> = React.memo(func
                         <p className="text-xs text-green-600">Documento de identidade já anexado</p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex flex-col sm:flex-row gap-2 w-full sm:w-auto mt-3 sm:mt-0">
                       <Button
                         variant="outline"
                         size="sm"

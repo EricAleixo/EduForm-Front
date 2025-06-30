@@ -221,7 +221,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = React.memo(function AdminPa
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 animate-fade-in-up duration-500">
+    <div className="relative w-full min-h-screen bg-gradient-to-br from-violet-50 via-white to-blue-50 flex flex-col">
       {/* Header Moderno */}
       <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

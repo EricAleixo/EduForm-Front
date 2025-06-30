@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 interface NotificationProps {
   type: 'success' | 'error' | 'warning' | 'info';
@@ -89,8 +90,9 @@ export const Notification: React.FC<NotificationProps> = ({
 
   const styles = getNotificationStyles();
 
-  return (
-    <div className="fixed top-4 right-2 sm:right-4 left-2 sm:left-auto z-[10000] animate-slide-in">
+  // Renderiza o Notification em um portal para garantir que fique no topo da tela
+  return createPortal(
+    <div className="fixed top-20 sm:top-32 right-4 z-[10000] animate-slide-in max-w-xs w-full">
       <div className={`
         bg-white border-2 ${styles.borderColor} rounded-xl shadow-xl p-3 sm:p-4 max-w-sm mx-auto sm:mx-0
         transform transition-all duration-300 ease-out hover:shadow-2xl
@@ -129,6 +131,7 @@ export const Notification: React.FC<NotificationProps> = ({
           />
         </div>
       </div>
-    </div>
+    </div>,
+    typeof window !== 'undefined' ? document.body : (null as any)
   );
 }; 

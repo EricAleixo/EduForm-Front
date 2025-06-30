@@ -155,6 +155,12 @@ export const FileUpload: React.FC<FileUploadProps> = ({
 
   return (
     <div className="space-y-2">
+      <label
+        className={`block mb-1 text-gray-700 font-medium text-sm sm:text-base ${error ? 'text-red-500' : ''}`}
+      >
+        {label}
+        {required && <span className="text-red-500 ml-1">*</span>}
+      </label>
       <div className="relative">
         <input
           ref={fileInputRef}
@@ -247,17 +253,6 @@ export const FileUpload: React.FC<FileUploadProps> = ({
             </div>
           </div>
         )}
-        
-        <label
-          className={`
-            absolute left-3 sm:left-4 text-gray-500 transition-all duration-300 ease-in-out pointer-events-none
-            ${value ? 'text-green-600 text-xs sm:text-sm -top-2 bg-green-50 px-2 border border-green-200 rounded-md' : 'text-xs sm:text-sm top-2'}
-            ${error ? 'text-red-500' : ''}
-          `}
-        >
-          {label}
-          {required && <span className="text-red-500 ml-1">*</span>}
-        </label>
       </div>
       
       {description && !error && !value && (
