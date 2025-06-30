@@ -39,7 +39,7 @@ const turnos = [
   { value: 'integral', label: 'Integral (7h às 18h)' },
 ];
 
-export const SchoolForm: React.FC = () => {
+export const SchoolForm: React.FC = React.memo(function SchoolForm() {
   const [formData, setFormData] = useState<StudentFormData>({
     nome: '',
     email: '',
@@ -195,7 +195,7 @@ export const SchoolForm: React.FC = () => {
   };
 
   return (
-    <>
+    <div className="animate-fade-in-up duration-500">
       <form onSubmit={handleSubmit} className="space-y-8">
         <FormSection
           title="Informações Pessoais"
@@ -481,6 +481,6 @@ export const SchoolForm: React.FC = () => {
         onClose={hideNotification}
         title={notification.title}
       />
-    </>
+    </div>
   );
-}; 
+}); 

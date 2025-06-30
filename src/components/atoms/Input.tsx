@@ -26,8 +26,24 @@ export const Input: React.FC<InputProps> = ({
   const [isFocused, setIsFocused] = useState(false);
   const [hasValue, setHasValue] = useState(!!value);
 
+  React.useEffect(() => {
+    setHasValue(!!value);
+  }, [value]);
+
+  const maskPhone = (value: string) => {
+    // Remove tudo que não for número
+    value = value.replace(/\D/g, '');
+    if (value.length <= 2) return value.replace(/(\d{0,2})/, '($1');
+    if (value.length <= 6) return value.replace(/(\d{2})(\d{0,4})/, '($1) $2');
+    if (value.length <= 10) return value.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    return value.replace(/(\d{2})(\d{5})(\d{0,4}).*/, '($1) $2-$3');
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
+    let newValue = e.target.value;
+    if (type === 'tel') {
+      newValue = maskPhone(newValue);
+    }
     setHasValue(!!newValue);
     onChange?.(newValue);
   };

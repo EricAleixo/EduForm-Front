@@ -11,6 +11,7 @@ interface ButtonProps {
   disabled?: boolean;
   loading?: boolean;
   fullWidth?: boolean;
+  className?:string;
   icon?: React.ReactNode;
 }
 
@@ -23,7 +24,8 @@ export const Button: React.FC<ButtonProps> = ({
   disabled = false,
   loading = false,
   fullWidth = false,
-  icon
+  icon,
+  className = ""
 }) => {
   const baseClasses = `
     inline-flex items-center justify-center font-medium rounded-xl cursor-pointer
@@ -55,6 +57,7 @@ export const Button: React.FC<ButtonProps> = ({
         ${baseClasses}
         ${variantClasses[variant]}
         ${sizeClasses[size]}
+        ${className}
       `}
     >
       {loading && (

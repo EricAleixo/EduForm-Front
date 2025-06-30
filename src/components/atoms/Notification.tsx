@@ -90,7 +90,7 @@ export const Notification: React.FC<NotificationProps> = ({
   const styles = getNotificationStyles();
 
   return (
-    <div className="fixed top-4 right-4 z-50 animate-slide-in">
+    <div className="fixed top-4 right-4 z-[10000] animate-slide-in">
       <div className={`
         bg-white border-2 ${styles.borderColor} rounded-xl shadow-xl p-4 max-w-sm
         transform transition-all duration-300 ease-out hover:shadow-2xl
