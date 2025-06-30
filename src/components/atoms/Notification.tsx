@@ -90,7 +90,9 @@ export const Notification: React.FC<NotificationProps> = ({
 
   const styles = getNotificationStyles();
 
-  // Renderiza o Notification em um portal para garantir que fique no topo da tela
+  // Evita erro de tipo: só renderiza o portal no client
+  if (typeof window === 'undefined') return null;
+
   return createPortal(
     <div className="fixed top-20 sm:top-32 right-4 z-[10000] animate-slide-in max-w-xs w-full">
       <div className={`
@@ -132,6 +134,6 @@ export const Notification: React.FC<NotificationProps> = ({
         </div>
       </div>
     </div>,
-    typeof window !== 'undefined' ? document.body : (null as any)
+    document.body
   );
 }; 

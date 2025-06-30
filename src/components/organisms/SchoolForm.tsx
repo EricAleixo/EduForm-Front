@@ -39,7 +39,11 @@ const turnos = [
   { value: 'integral', label: 'Integral (7h às 18h)' },
 ];
 
-export const SchoolForm: React.FC = React.memo(function SchoolForm() {
+interface SchoolFormProps {
+  onNotification?: (type: 'success' | 'error' | 'warning' | 'info', message: string, title?: string) => void;
+}
+
+export const SchoolForm: React.FC<SchoolFormProps> = React.memo(function SchoolForm({ onNotification }) {
   const [formData, setFormData] = useState<StudentFormData>({
     nome: '',
     email: '',
@@ -124,12 +128,16 @@ export const SchoolForm: React.FC = React.memo(function SchoolForm() {
   };
 
   const showNotification = (type: 'success' | 'error' | 'warning' | 'info', message: string, title?: string) => {
-    setNotification({
-      type,
-      message,
-      isVisible: true,
-      title,
-    });
+    if (onNotification) {
+      onNotification(type, message, title);
+    } else {
+      setNotification({
+        type,
+        message,
+        isVisible: true,
+        title,
+      });
+    }
   };
 
   const hideNotification = () => {
@@ -476,13 +484,15 @@ export const SchoolForm: React.FC = React.memo(function SchoolForm() {
         </div>
       </form>
 
-      <Notification
-        type={notification.type}
-        message={notification.message}
-        isVisible={notification.isVisible}
-        onClose={hideNotification}
-        title={notification.title}
-      />
+      {!onNotification && (
+        <Notification
+          type={notification.type}
+          message={notification.message}
+          isVisible={notification.isVisible}
+          onClose={hideNotification}
+          title={notification.title}
+        />
+      )}
     </div>
   );
 }); 
