@@ -90,36 +90,36 @@ export const Notification: React.FC<NotificationProps> = ({
   const styles = getNotificationStyles();
 
   return (
-    <div className="fixed top-4 right-4 z-[10000] animate-slide-in">
+    <div className="fixed top-4 right-2 sm:right-4 left-2 sm:left-auto z-[10000] animate-slide-in">
       <div className={`
-        bg-white border-2 ${styles.borderColor} rounded-xl shadow-xl p-4 max-w-sm
+        bg-white border-2 ${styles.borderColor} rounded-xl shadow-xl p-3 sm:p-4 max-w-sm mx-auto sm:mx-0
         transform transition-all duration-300 ease-out hover:shadow-2xl
       `}>
-        <div className="flex items-start space-x-3">
-          <div className={`flex-shrink-0 w-8 h-8 ${styles.bgColor} rounded-full flex items-center justify-center animate-bounce-in`}>
+        <div className="flex items-start space-x-2 sm:space-x-3">
+          <div className={`flex-shrink-0 w-6 h-6 sm:w-8 sm:h-8 ${styles.bgColor} rounded-full flex items-center justify-center animate-bounce-in`}>
             {styles.icon}
           </div>
           
           <div className="flex-1 min-w-0">
-            <h4 className={`text-sm font-semibold ${styles.iconColor}`}>
+            <h4 className={`text-xs sm:text-sm font-semibold ${styles.iconColor}`}>
               {styles.title}
             </h4>
-            <p className="text-sm text-gray-600 mt-1 break-words">{message}</p>
+            <p className="text-xs sm:text-sm text-gray-600 mt-1 break-words">{message}</p>
           </div>
           
           <button
             onClick={onClose}
-            className="flex-shrink-0 text-gray-400 hover:text-gray-600 transition-colors duration-200 hover:scale-110"
+            className="flex-shrink-0 text-gray-400 hover:text-gray-600 transition-colors duration-200 hover:scale-110 p-1"
             title="Fechar notificação"
           >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
         
         {/* Barra de progresso */}
-        <div className="mt-3 h-1 bg-gray-200 rounded-full overflow-hidden">
+        <div className="mt-2 sm:mt-3 h-1 bg-gray-200 rounded-full overflow-hidden">
           <div 
             className={`h-full ${styles.bgColor} transition-all duration-300 ease-linear`}
             style={{ 

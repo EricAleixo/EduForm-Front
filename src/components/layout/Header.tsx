@@ -1,11 +1,21 @@
 'use client';
 
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 
 export const Header: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
-    <header className="bg-gradient-to-r from-blue-600 to-purple-700 text-white">
+    <header className="bg-gradient-to-r from-blue-600 to-purple-700 text-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-3">
@@ -22,7 +32,8 @@ export const Header: React.FC = () => {
             </div>
           </div>
 
-          <nav className="flex items-center space-x-8">
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
             <Link href="/" className="text-blue-100 hover:text-white transition-colors">
               Início
             </Link>
@@ -31,14 +42,46 @@ export const Header: React.FC = () => {
             </Link>
           </nav>
 
+          {/* Mobile menu button */}
           <div className="md:hidden">
-            <button className="text-blue-100 hover:text-white">
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+            <button 
+              onClick={toggleMenu}
+              className="text-blue-100 hover:text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-white"
+            >
+              {isMenuOpen ? (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
             </button>
           </div>
         </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden border-t border-blue-500">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-blue-700 rounded-b-lg">
+              <Link 
+                href="/" 
+                onClick={closeMenu}
+                className="block px-3 py-2 text-blue-100 hover:text-white hover:bg-blue-600 rounded-md transition-colors"
+              >
+                Início
+              </Link>
+              <Link 
+                href="/admin" 
+                onClick={closeMenu}
+                className="block px-3 py-2 text-blue-100 hover:text-white hover:bg-blue-600 rounded-md transition-colors"
+              >
+                Admin
+              </Link>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );

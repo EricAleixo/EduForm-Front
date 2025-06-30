@@ -225,39 +225,40 @@ export const AdminPanel: React.FC<AdminPanelProps> = React.memo(function AdminPa
       {/* Header Moderno */}
       <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between py-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between py-4 sm:py-6 gap-4 sm:gap-0">
             {/* Botão Página Principal */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 order-1 sm:order-1">
               <Button
                 variant="outline"
                 onClick={() => window.location.href = '/'}
-                className="text-white border-white/40 hover:bg-white/10"
+                className="text-white border-white/40 hover:bg-white/10 text-sm sm:text-base"
                 icon={
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                   </svg>
                 }
               >
-                Página Principal
+                <span className="hidden sm:inline">Página Principal</span>
+                <span className="sm:hidden">Início</span>
               </Button>
             </div>
             {/* Título Central com Ícone */}
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg animate-pulse mb-2">
-                <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="flex flex-col items-center order-2 sm:order-2">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg animate-pulse mb-2">
+                <svg className="w-6 h-6 sm:w-7 sm:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h1 className="text-2xl font-bold text-white drop-shadow">Painel Administrativo</h1>
+              <h1 className="text-xl sm:text-2xl font-bold text-white drop-shadow text-center">Painel Administrativo</h1>
             </div>
             {/* Botão Sair */}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 order-3 sm:order-3">
               <Button
                 variant="outline"
                 onClick={handleLogout}
-                className="text-white border-white/40 hover:bg-white/10"
+                className="text-white border-white/40 hover:bg-white/10 text-sm sm:text-base"
                 icon={
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                   </svg>
                 }
@@ -269,89 +270,89 @@ export const AdminPanel: React.FC<AdminPanelProps> = React.memo(function AdminPa
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {/* Estatísticas */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
-          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-6 sm:mb-8">
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6 border-l-4 border-blue-500">
             <div className="flex items-center">
               <div className="p-2 bg-blue-100 rounded-lg">
-                <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Total</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
+              <div className="ml-3 sm:ml-4">
+                <p className="text-xs sm:text-sm font-medium text-gray-600">Total</p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-900">{stats.total}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6 border-l-4 border-green-500">
             <div className="flex items-center">
               <div className="p-2 bg-green-100 rounded-lg">
-                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Recentes</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.recent}</p>
+              <div className="ml-3 sm:ml-4">
+                <p className="text-xs sm:text-sm font-medium text-gray-600">Recentes</p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-900">{stats.recent}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-yellow-500">
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6 border-l-4 border-yellow-500">
             <div className="flex items-center">
               <div className="p-2 bg-yellow-100 rounded-lg">
-                <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Manhã</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.manha}</p>
+              <div className="ml-3 sm:ml-4">
+                <p className="text-xs sm:text-sm font-medium text-gray-600">Manhã</p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-900">{stats.manha}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-orange-500">
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6 border-l-4 border-orange-500">
             <div className="flex items-center">
               <div className="p-2 bg-orange-100 rounded-lg">
-                <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                 </svg>
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Tarde</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.tarde}</p>
+              <div className="ml-3 sm:ml-4">
+                <p className="text-xs sm:text-sm font-medium text-gray-600">Tarde</p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-900">{stats.tarde}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-purple-500">
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6 border-l-4 border-purple-500">
             <div className="flex items-center">
               <div className="p-2 bg-purple-100 rounded-lg">
-                <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                 </svg>
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Noite</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.noite}</p>
+              <div className="ml-3 sm:ml-4">
+                <p className="text-xs sm:text-sm font-medium text-gray-600">Noite</p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-900">{stats.noite}</p>
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-lg shadow p-6 border-l-4 border-indigo-500">
+          <div className="bg-white rounded-lg shadow p-4 sm:p-6 border-l-4 border-indigo-500">
             <div className="flex items-center">
               <div className="p-2 bg-indigo-100 rounded-lg">
-                <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <div className="ml-4">
-                <p className="text-sm font-medium text-gray-600">Integral</p>
-                <p className="text-2xl font-bold text-gray-900">{stats.integral}</p>
+              <div className="ml-3 sm:ml-4">
+                <p className="text-xs sm:text-sm font-medium text-gray-600">Integral</p>
+                <p className="text-lg sm:text-2xl font-bold text-gray-900">{stats.integral}</p>
               </div>
             </div>
           </div>
@@ -359,8 +360,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = React.memo(function AdminPa
 
         {/* Filtros e Busca Modernos */}
         <div className="bg-white rounded-lg shadow mb-6">
-          <div className="p-6 border-b border-gray-200">
-            <div className="flex flex-col sm:flex-row gap-4 items-center">
+          <div className="p-4 sm:p-6 border-b border-gray-200">
+            <div className="flex flex-col gap-4 items-stretch sm:items-center">
               {/* Busca global */}
               <div className="flex-1">
                 <div className="relative">
@@ -374,12 +375,12 @@ export const AdminPanel: React.FC<AdminPanelProps> = React.memo(function AdminPa
                     placeholder="Buscar por nome, email, responsável, turma, série..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                    className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 text-sm sm:text-base"
                   />
                 </div>
               </div>
               {/* Filtros avançados */}
-              <div className="flex flex-wrap gap-2 items-center">
+              <div className="flex flex-wrap gap-2 items-center justify-center sm:justify-start">
                 {/* Turno */}
                 <div className="flex items-center gap-1">
                   <svg className="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -388,7 +389,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = React.memo(function AdminPa
                   <select
                     value={selectedFilter}
                     onChange={(e) => setSelectedFilter(e.target.value)}
-                    className="px-2 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900"
+                    className="px-2 py-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-gray-900 text-sm"
                   >
                     <option value="all">Todos</option>
                     <option value="recent">Última Semana</option>

@@ -206,7 +206,7 @@ export const SchoolForm: React.FC = React.memo(function SchoolForm() {
             </svg>
           }
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <FormField
               type="text"
               label="Nome Completo"
@@ -282,7 +282,7 @@ export const SchoolForm: React.FC = React.memo(function SchoolForm() {
             </svg>
           }
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             <FormField
               type="select"
               label="Série"
@@ -431,7 +431,7 @@ export const SchoolForm: React.FC = React.memo(function SchoolForm() {
         </FormSection>
 
         {/* Botões de Ação */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-end">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-end">
           <Button
             variant="outline"
             onClick={() => {
@@ -451,6 +451,7 @@ export const SchoolForm: React.FC = React.memo(function SchoolForm() {
               });
               setErrors({});
             }}
+            className="w-full sm:w-auto"
           >
             Limpar Formulário
           </Button>
@@ -458,6 +459,7 @@ export const SchoolForm: React.FC = React.memo(function SchoolForm() {
           <Button
             type="submit"
             loading={loading}
+            className="w-full sm:w-auto"
             icon={
               <svg
                 className={`w-5 h-5 transition-all duration-300 ${isIconFlying ? 'animate-fly-up' : ''}`}

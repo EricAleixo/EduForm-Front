@@ -68,9 +68,9 @@ export const Input: React.FC<InputProps> = ({
           placeholder={placeholder}
           required={required}
           className={`
-            w-full px-4 py-4 text-gray-700 bg-white border-2 rounded-xl
+            w-full px-3 sm:px-4 py-3 sm:py-4 text-sm sm:text-base text-gray-700 bg-white border-2 rounded-xl
             transition-all duration-300 ease-in-out
-            ${icon ? 'pl-12' : ''}
+            ${icon ? 'pl-10 sm:pl-12' : ''}
             ${isFocused || hasValue ? 'border-blue-500 shadow-lg shadow-blue-100' : 'border-gray-200'}
             ${error ? 'border-red-500 shadow-red-100' : ''}
             focus:outline-none focus:ring-0
@@ -80,9 +80,9 @@ export const Input: React.FC<InputProps> = ({
         />
         <label
           className={`
-            absolute left-4 text-gray-500 transition-all duration-300 ease-in-out pointer-events-none
-            ${icon ? 'left-12' : ''}
-            ${isFocused || hasValue ? 'text-blue-600 text-sm -top-2 bg-blue-50 px-2 border border-blue-200 rounded-md' : type === 'date' ? 'text-sm top-2' : 'text-base top-4'}
+            absolute left-3 sm:left-4 text-gray-500 transition-all duration-300 ease-in-out pointer-events-none
+            ${icon ? 'left-10 sm:left-12' : ''}
+            ${isFocused || hasValue ? 'text-blue-600 text-xs sm:text-sm -top-2 bg-blue-50 px-2 border border-blue-200 rounded-md' : type === 'date' ? 'text-xs sm:text-sm top-2' : 'text-sm sm:text-base top-3 sm:top-4'}
             ${error ? 'text-red-500' : ''}
           `}
         >
@@ -91,8 +91,8 @@ export const Input: React.FC<InputProps> = ({
         </label>
       </div>
       {error && (
-        <p className="mt-2 text-sm text-red-500 flex items-center">
-          <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+        <p className="mt-2 text-xs sm:text-sm text-red-500 flex items-center">
+          <svg className="w-3 h-3 sm:w-4 sm:h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
           </svg>
           {error}
