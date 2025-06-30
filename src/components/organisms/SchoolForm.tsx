@@ -195,7 +195,7 @@ export const SchoolForm: React.FC = React.memo(function SchoolForm() {
   };
 
   return (
-    <div className="animate-fade-in-up duration-500">
+    <div className="relative w-full max-w-3xl mx-auto p-4 sm:p-8 bg-white rounded-2xl shadow-2xl border border-gray-200/70 animate-fade-in-up duration-500">
       <form onSubmit={handleSubmit} className="space-y-8">
         <FormSection
           title="Informações Pessoais"
